@@ -31,3 +31,72 @@ I it is based on the load testing actually, because we use
 Apache load testing as well as Blaze meter load testing.
  So we test with incrementally with 100 users 200 users 300 users based upon that we'll have the reports and we increase 
 the count of the pods based upon the load and we create the benchmarking.
+kubectl -logs <pod name> -c <container name> #To check out the events to failed
+
+#We need to more focus on Nginx config file, need to understand it.
+By Using Network polocies we can Allow or Restrics the trafic at pod level or namespace level.
+
+###CI/CD Pipeline:
+So we need to divide the pipeline into two different sets. 
+One is a infrastructure pipeline and the other one is a CI CD pipeline 
+for the application infrastructure pipeline. I basically create the 
+infrastructure like load balancers, DNS records, as well as easy to 
+servers even if possible even Kubernetes services as well. I'm in
+ Kubernetes cluster as well. So when it comes to the application CI 
+ CD pipeline, so it will always start as a multi stage pipeline,
+  starting with the checkout first. And after that we have the first 
+  stage will be sonar cube analysis for doing static application testing. 
+  To find out if there are any bugs or vulnerabilities or any code coverage issues. 
+  And after that, if it is a Java based Spring Boot application, then we normally use
+   the Maven to build the application by using Maven lifecycle, which contains a Maven
+    Maven install maven package Maven deploy and we use j frog Artifactory to publish 
+    the artifacts. So once the artifact is ready, 
+    then we normally build a Docker image out of that by 
+    using a Docker file and then we push it to the elastic Container Registry. So from there, the next stage will be I will be updating the deployment file or a manifest or a Helm chart 
+so that we can roll out the deployment into the Kubernetes environment.
+
+In the proccess of CI/CD Pipeline:
+We normally follow multistage pipeline.
+1.First we check out the code from version control system.
+2.Then we gonna doing static code analysis by Sonar Qube . To find out the bugs or volunarabilities and code smell.
+3.If it is java based spring boot application we use maven to compile the code by using maven lifecycle,
+Which containes install,maven package, maven deploy.
+We use Jfrog repository to publish the Artifacts.
+So once the artifact is ready we normally build the docker image by using docker file.
+the push it to the Elastic container Registry.
+5.so from there updating deployment file or menifest file or helm chart into k8s environment.
+Maven clean: It will revome existing repository.
+Maven Run: to run the test cases.
+maven build : To compile the source code 
+Maven compile: to build the Artifacts.then package.
+#Which type of error u would face to compile the code :
+Sometimes code errors or mismatch .
+Some times unable to deploy the artifacts to Jfrog,becuase we need SSL Certificate,
+So it will show me the ERROR MASSAGE that what causing to get error masg.
+Sometimes i need to upgrade the maven version to latest version,and check in Jfrog to add SSL Certificate to add.
+We start troubleshooting based upon the error masg.
+
+#How will you start trouble ashooting:
+So first i need to understad the what is the error for that i'll go to console, Whether it is dependency error or Access error.
+Apart from that we have also Slack integration ,which will send us email,why it was failed,based upon i'll trouble shoot.
+
+If i need to mearge a specific bugs commits  to another branch or master branch, i choose cherry pick to mearge 
+from one brach to another branch ,no need to mearge all the code ,
+In regular basis we gonna merge to tthr dev branch then promot to the master. 
+
+#Git bugs:
+Creation of feature branch: A new branch is created from the main branch (often called the "master" branch) to implement a new feature or fix a bug.
+
+Development: Changes are made to the feature branch, which may involve multiple commits and iterations.
+
+Deployments techniques: Depending upon the project we use 3 Deployments,
+1.Rolling updates.2.blue green updates.2.blue. 3. Canary deployment 
+Blue green deployment: will helps to swich from one env to letest env.There might be a production down time. if the application ahve any issues.
+Canary deployment: To over come that production down time we use Canary deployment, it will allow the trafic parcially to new ENV,
+Then gradually we gonna increase traffic to new env.There
+
+#Docker file:
+Mostly we use  muilti stage docker file :
+To avoid the big size of the image.
+In first stage we install dependencies like for python we install pip, for node js NPM.
+
