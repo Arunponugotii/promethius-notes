@@ -1,0 +1,33 @@
+Kubernetes Have 5 diff Services:
+1. ClusterIP
+2.Node Port 
+Load balancer
+4.Externanl name or DNS
+5.Headless Services:
+In genaral: We use CLusterIP and Ingress Controller to allow the Traffic from outside to Pods.
+We use node port and load balancer to expose our application to outside.
+ReplicaSets uses to make sure application availabiity and scalability.
+When we are deploying the application by using replicaSet, It will create desired Pods.
+ReplicaSet by default created when deployments happends.
+When Node is failed or down for any reason 
+ReplicaSet gonna create another healthy node and deploys the application.
+In K8s Network is Overlay network which means ,It will interconnected between pods and containers.
+So irrespective of the node Pods will reachable to outside.
+K8s service is working as a loadbalancer, It is connected to all the nodes,If one node is failed
+for any reason ,it will moves to another healthy nodes.
+If one node is failed for any reason,ReplicaSet will spin up the additional pods,
+Servce gonna be connect to the surviving nodes.
+Ports are opened to the surviving nodes,
+By default ports are opened while deployments and services.
+Horizontal Pod Autoscaling (HPA) is a feature in Kubernetes that allows you to automatically scale the number of pods in a deployment
+or replica set based on the observed CPU utilization or custom metrics of the running pods.
+It will scale up or scale down the pods.
+Karpentor also works as HPA for scaling the nodes.
+BlazeMeter is a cloud-based load testing platform that enables you to easily conduct load testing and performance testing of your applications and APIs. 
+It provides a range of features and capabilities, including.
+Overall, BlazeMeter is a powerful tool for load testing and performance testing of applications and APIs. It enables you to easily simulate high volumes of traffic and measure the performance of your system under stress, 
+which can help you identify and resolve performance bottlenecks and other issues.
+I it is based on the load testing actually, because we use 
+Apache load testing as well as Blaze meter load testing.
+ So we test with incrementally with 100 users 200 users 300 users based upon that we'll have the reports and we increase 
+the count of the pods based upon the load and we create the benchmarking.
