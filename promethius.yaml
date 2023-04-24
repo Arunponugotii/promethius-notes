@@ -1,1 +1,49 @@
 #PROMITHIUS
+Intro: Prometheus is a monitoring solution based on Time Series Database(TSDB) i.e. 
+it records and store pure numeric time series. It gathers, organizes and store metrics 
+along with unique identifiers and timestamp. It collect metrics by scraping the HTTP endpoints 
+of the configured targets, which may include bare metal server, database instance, Kubernetes 
+cluster, an application exposing important metrics, etc. Along with its companion Alertmanager
+ service, Prometheus works as a monitoring and alerting tool.
+
+ Prometheus Working and Architecture:
+In a nutshell Prometheus collect metrics from the configured targets at a given time interval, 
+stores them in a local/configured time series database, evaluates rule expression,
+displays the result and can trigger an alerts if some conditions evaluates to true.
+To understand the working in a detailed manner lets look at the prometheus architecture.
+
+image.png
+https://miro.medium.com/v2/resize:fit:4800/format:webp/0*Z6RE1EejnnM5iVev.png
+
+Web UI & Visualization: Prometheus web app includes a built-in utility called 
+
+“expression browser” which provides direct access to enter any expression and visualize 
+its result either in a table or graph format. However, the expression browser 
+is primarily useful for ad-hoc queries and debugging, for actual graphs Grafana is recommended.
+
+So the complete process can be summarized as:
+
+The Client libraries in Application and Exporters elsewhere will be exposing 
+the metrics over the HTTP endpoints.
+The Prometheus Server will be scraping those metrics after receiving the 
+endpoints information from service discovery module
+Prometheus Server will than evaluate the Recording Rules and will store
+ the metrics in the local/external TSDB.
+Prometheus Server will than evaluate the alerting rules and in case a
+ condition is met, it will than send an alert to the alert manager.
+On receiving an alert from Prometheus Server the AlertManager will 
+send the notification via email, slack, etc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
